@@ -1,0 +1,17 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pp="http://primefaces.org/luna-green">
+
+	<h:form id="menuform">
+		<div class="layout-menu-container">
+			<p:menubar styleClass="menu-dash">
+				<p:menuitem value="Início" icon="fa fa-home" outcome="/public/index.jsf" />
+				<p:menuitem value="Cadastrar Tarefas" icon="fa fa-list" outcome="/public//cadastro.jsf" />
+				<p:menuitem  value="Consultar Tarefas" outcome="/public/consulta.jsf" icon="fa fa-search" />
+			</p:menubar>
+		</div>
+	</h:form>
+</ui:composition>

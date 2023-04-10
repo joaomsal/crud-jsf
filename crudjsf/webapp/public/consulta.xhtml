@@ -1,0 +1,89 @@
+<ui:composition template="/WEB-INF/template/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<ui:define name="head">
+	</ui:define>
+
+	<ui:define name="title">CRUD JSF | Consultar Tarefa</ui:define>
+
+	<ui:define name="viewname">Consultar Tarefa</ui:define>
+
+	<ui:define name="content">
+
+		<h:body styleClass="login-body">
+			<div class="ui-g ui-fluid">
+				<div class="ui-g-12">
+					<h:form>
+						<p:messages />
+						<p:panel header="Consultar Tarefas" style="text-align: center;">
+							<p:panelGrid columns="2" style="width: 80%;">
+								<p:outputLabel value="Número:" />
+								<p:inputText placeholder="insira o número da tarefa"
+									value="#{tarefaMBean.tarefa.id}" type="number" />
+
+								<p:outputLabel value="Título/Descrição:" />
+								<p:inputText
+									placeholder="insira o título ou descrição da tarefa"
+									value="#{tarefaMBean.tarefa.titulo}" type="text" />
+
+								<p:outputLabel value="Responsável:" />
+								<p:selectOneMenu placeholder="Selecione o responsável"
+									value="#{tarefaMBean.tarefa.responsavel}">
+									<f:selectItem itemLabel="Selecione o responsável" itemValue="" />
+									<f:selectItem itemLabel="João" itemValue="João" />
+									<f:selectItem itemLabel="Maria" itemValue="Maria" />
+									<f:selectItem itemLabel="José" itemValue="José" />
+								</p:selectOneMenu>
+
+								<p:outputLabel value="Situação" />
+								<p:selectOneMenu placeholder="Selecione a situação"
+									value="#{tarefaMBean.tarefa.situacao}">
+									<f:selectItem itemLabel="Selecione a situação da tarefa"
+										itemValue="" />
+									<f:selectItem itemLabel="em andamento" itemValue="em andamento" />
+									<f:selectItem itemLabel="concluída" itemValue="concluída" />
+								</p:selectOneMenu>
+
+								<f:facet name="footer">
+									<center>
+										<p:commandButton value="Buscar" icon="fa fa-search"
+											update="@form" process="@form"
+											actionListener="#{tarefaMBean.buscar}" style="width: 30%;" />
+									</center>
+								</f:facet>
+							</p:panelGrid>
+						</p:panel>
+
+						<div class="ui-g-12">
+							<p:panel>
+								<p:dataTable id="tabTarefas" value="#{tarefaMBean.tarefas}"
+									var="tarefa" emptyMessage="Nenhuma tarefa encontrada"
+									sortBy="#{tarefa.titulo}">
+									<f:facet name="header">Tarefas Encontradas</f:facet>
+									<p:column headerText="Número" sortBy="#{tarefa.id}">
+										<h:outputText value="#{tarefa.id}" />
+									</p:column>
+									<p:column headerText="Título">
+										<h:outputText value="#{tarefa.titulo}" />
+									</p:column>
+									<p:column headerText="Responsável">
+										<h:outputText value="#{tarefa.responsavel}" />
+									</p:column>
+									<p:column headerText="Ações">
+
+									</p:column>
+								</p:dataTable>
+							</p:panel>
+						</div>
+
+
+					</h:form>
+				</div>
+			</div>
+		</h:body>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <f:facet name="first">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+            <meta name="apple-mobile-web-app-capable" content="yes" />
+        </f:facet>
+        <title><ui:insert name="title">CRUD JSF</ui:insert></title>
+        <ui:insert name="head"/>
+        
+            
+    </h:head>
+
+    <h:body styleClass="main-body">
+    
+    <f:view>
+        
+        <div class="layout-wrapper menu-layout-static menu-layout-horizontal">
+            <ui:include src="./topbar.xhtml" />
+            <ui:include src="./menu.xhtml" />
+            
+            <div class="layout-main">
+                <div class="route-bar">
+                    <i class="fa fa-home"></i> <span>/ </span>
+                    <ui:insert name="viewname" />
+
+                </div>
+                <div class="layout-main-content">
+                    <ui:insert name="content"/>
+                </div>
+                
+                <ui:include src="./footer.xhtml" />
+            </div>
+        </div>
+        
+        <p:ajaxStatus style="width:32px;height:32px;position:fixed;right:7px;bottom:7px">
+           <f:facet name="start">
+               <i class="fa fa-circle-o-notch fa-spin ajax-loader" aria-hidden="true"></i>
+           </f:facet>
+
+           <f:facet name="complete">
+               <h:outputText value="" />
+           </f:facet>
+       </p:ajaxStatus>    
+         </f:view>
+
+        <h:outputStylesheet name="css/theme.css" library="luna-green" />
+       
+    </h:body>
+
+</html>
