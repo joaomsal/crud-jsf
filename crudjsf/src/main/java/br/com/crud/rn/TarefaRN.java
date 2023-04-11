@@ -25,11 +25,11 @@ public class TarefaRN implements Serializable{
 	}
 	
 	public void atualizar(Tarefa tarefa) {
-//		this.dao.atualizar(tarefa);
+		this.dao.alterar(tarefa);
 	}
 	
 	public void deletar(Tarefa tarefa) {
-//		this.dao.deletar(tarefa);
+		this.dao.deletar(tarefa.getId());
 	}
 	
 	public List<Tarefa> listar() {

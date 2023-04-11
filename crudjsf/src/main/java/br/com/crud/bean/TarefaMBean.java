@@ -23,12 +23,15 @@ public class TarefaMBean implements Serializable{
 
 	private Tarefa tarefa;
 	
+	private Tarefa selecionada;
+	
 	private List<Tarefa> tarefas;
 	
 	private TarefaRN tarefaRN;
 	
 	public TarefaMBean() {
 		tarefa = new Tarefa();
+		selecionada = new Tarefa();
 		tarefas = new ArrayList<Tarefa>();
 		tarefaRN = new TarefaRN();
 		tarefas = tarefaRN.listar();
@@ -43,7 +46,47 @@ public class TarefaMBean implements Serializable{
 			e.printStackTrace();
 		}finally {
 			tarefa = new Tarefa();
-//			tarefas = tarefaRN.listar();
+		}
+	}
+	
+	
+	public void deletar() {
+		try {
+			tarefaRN.deletar(selecionada);
+			tarefas = tarefaRN.listar();
+			MensagemUtil.adicionarMensagemConfirmacao("Tarefa deletada com sucesso.");
+		} catch (Exception e) {
+			MensagemUtil.adicionarMensagemErro("Erro ao deletar tarefa.");
+			e.printStackTrace();
+		}finally {
+			tarefa = new Tarefa();
+		}
+	}
+	
+	
+	public void alterar() {
+		try {
+			tarefaRN.atualizar(selecionada);
+			MensagemUtil.adicionarMensagemConfirmacao("Tarefa alterada com sucesso.");
+		} catch (Exception e) {
+			MensagemUtil.adicionarMensagemErro("Erro ao alterada tarefa.");
+			e.printStackTrace();
+		}finally {
+			tarefa = new Tarefa();
+		}
+	}
+	
+	
+	public void concluir() {
+		try {
+			selecionada.setSituacao("concluída");
+			tarefaRN.atualizar(selecionada);
+			MensagemUtil.adicionarMensagemConfirmacao("Tarefa concluída com sucesso.");
+		} catch (Exception e) {
+			MensagemUtil.adicionarMensagemErro("Erro ao concluir tarefa.");
+			e.printStackTrace();
+		}finally {
+			tarefa = new Tarefa();
 		}
 	}
 	
@@ -73,7 +116,14 @@ public class TarefaMBean implements Serializable{
 	public void setTarefas(List<Tarefa> tarefas) {
 		this.tarefas = tarefas;
 	}
-	
+
+	public Tarefa getSelecionada() {
+		return selecionada;
+	}
+
+	public void setSelecionada(Tarefa selecionada) {
+		this.selecionada = selecionada;
+	}
 	
 
 }

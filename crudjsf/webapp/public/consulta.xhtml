@@ -17,7 +17,7 @@
 		<h:body styleClass="login-body">
 			<div class="ui-g ui-fluid">
 				<div class="ui-g-12">
-					<h:form>
+					<h:form id="form_geral">
 						<p:messages />
 						<p:panel header="Consultar Tarefas" style="text-align: center;">
 							<p:panelGrid columns="2" style="width: 80%;">
@@ -73,15 +73,87 @@
 									<p:column headerText="Responsável">
 										<h:outputText value="#{tarefa.responsavel}" />
 									</p:column>
-									<p:column headerText="Ações">
+									<p:column headerText="Ações" width="15%" style="text-align: center;">
+											<p:commandButton icon="fa fa-edit" title="Editar"
+												update=":form_dialog" process="@this"
+												onclick="PF('altCard').show();" styleClass="ui-button-warning" >
+												<f:setPropertyActionListener value="#{tarefa}"
+													target="#{tarefaMBean.selecionada}" />
+											</p:commandButton>
+											<p:commandButton icon="fa fa-trash" title="Excluir"
+												action="#{tarefaMBean.deletar}"
+												update=":form_geral:tabTarefas" process=":form_geral:tabTarefas" 
+												styleClass="ui-button-danger">
+												<f:setPropertyActionListener value="#{tarefa}"
+													target="#{tarefaMBean.selecionada}" />
+											</p:commandButton>
+											<p:commandButton icon="fa fa-check" title="Concluir"
+												action="#{tarefaMBean.concluir}" process="@this"
+												update=":form_geral" styleClass="ui-button-info">
+												<f:setPropertyActionListener value="#{tarefa}"
+													target="#{tarefaMBean.selecionada}" />
+											</p:commandButton>
 
 									</p:column>
 								</p:dataTable>
 							</p:panel>
 						</div>
-
-
 					</h:form>
+					<p:dialog modal="true" responsive="true"
+						header="Alterar tarefa" widgetVar="altCard">
+						<h:form id="form_dialog">
+							<p:panelGrid columns="2" style="width: 80%;">
+								<p:outputLabel value="Título:" indicateRequired="true" />
+								<p:inputText placeholder="insira o título da tarefa"
+									required="true"
+									requiredMessage="É necessário informar o título da tarefa."
+									value="#{tarefaMBean.selecionada.titulo}" type="text" />
+
+								<p:outputLabel value="Descrição:" indicateRequired="true" />
+								<p:inputTextarea required="true"
+									requiredMessage="É necessário informar a descrição da tarefa."
+									value="#{tarefaMBean.selecionada.descricao}"
+									placeholder="insira a descrição da tarefa" />
+
+								<p:outputLabel value="Responsável:" indicateRequired="true" />
+								<p:selectOneMenu placeholder="Selecione o responsável"
+									required="true"
+									requiredMessage="É necessário informar um responsável para a tarefa."
+									value="#{tarefaMBean.selecionada.responsavel}">
+									<f:selectItem itemLabel="Selecione o responsável" itemValue="" />
+									<f:selectItem itemLabel="João" itemValue="João" />
+									<f:selectItem itemLabel="Maria" itemValue="Maria" />
+									<f:selectItem itemLabel="José" itemValue="José" />
+								</p:selectOneMenu>
+
+								<p:outputLabel value="Prioridade:" indicateRequired="true" />
+								<p:selectOneMenu placeholder="Selecione a prioridade"
+									required="true"
+									requiredMessage="É necessário informar a priodidade da tarefa."
+									value="#{tarefaMBean.selecionada.prioridade}">
+									<f:selectItem itemLabel="Selecione a prioridade" itemValue="" />
+									<f:selectItem itemLabel="alta" itemValue="alta" />
+									<f:selectItem itemLabel="média" itemValue="média" />
+									<f:selectItem itemLabel="baixa" itemValue="baixa" />
+
+								</p:selectOneMenu>
+
+								<p:outputLabel value="Deadline:" indicateRequired="true" />
+								<p:calendar id="data" locale="pt" navigator="true"
+									required="true" placeholder="informe o deadline"
+									requiredMessage="É necessário informar da data do deadline."
+									value="#{tarefaMBean.selecionada.deadline}" mask="true"
+									pattern="dd/MM/yyyy" />
+								<f:facet name="footer">
+									<center>
+										<p:commandButton value="Alterar" icon="fa fa-save"
+											process="@this"	update=":form_dialog" ajax="false"
+											actionListener="#{tarefaMBean.alterar}" style="width: 30%;" />
+									</center>
+								</f:facet>
+							</p:panelGrid>
+						</h:form>
+					</p:dialog>
 				</div>
 			</div>
 		</h:body>
