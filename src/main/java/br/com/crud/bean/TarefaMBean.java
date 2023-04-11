@@ -39,6 +39,7 @@ public class TarefaMBean implements Serializable{
 	
 	public void adicionar() {
 		try {
+			tarefa.setSituacao("em andamento");
 			tarefaRN.inserir(tarefa);
 			MensagemUtil.adicionarMensagemConfirmacao("Tarefa adicionada com sucesso.");
 		} catch (Exception e) {
