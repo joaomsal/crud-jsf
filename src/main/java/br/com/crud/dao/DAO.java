@@ -7,6 +7,13 @@ import javax.persistence.Query;
 
 import br.com.crud.model.Tarefa;
 
+/**
+ * Classe de acesso à base de dados.
+ * Contém as consultas utilizadas pela aplicação.
+ * 
+ * @author João Manoel Santos Almeida
+ * @since Abril 2023
+ * */
 public class DAO {
 	
 	private static EntityManager em = null;
@@ -15,11 +22,20 @@ public class DAO {
 		em = ConnectionFactory.getEntityManager();
 	}
 	
+	/**
+	 * Método buscar por ID, responsável por consultar tarefa através do seu ID.
+	 * @param id
+	 * @return Tarefa
+	 * */
 	public Tarefa buscarPorId(int id) {
 		return em.find(Tarefa.class, id);
 	}
 	
 	
+	/**
+	 * Método inserir, responsável por inserir registro na base de dados.
+	 * @param tarefa
+	 * */
 	public void inserir(Tarefa tarefa) {
 		try {
 			em.getTransaction().begin();
@@ -31,6 +47,10 @@ public class DAO {
 		}
 	}
 	
+	/**
+	 * Método alterar, responsável por alterar registro na base de dados.
+	 * @param tarefa
+	 * */
 	public void alterar(Tarefa tarefa) {
 		try {
 			em.getTransaction().begin();
@@ -42,6 +62,10 @@ public class DAO {
 		}
 	}
 	
+	/**
+	 * Método deçetar, responsável por exluir registro na base de dados.
+	 * @param tarefa
+	 * */
 	public void deletar(int id) {
 		Tarefa tarefa = buscarPorId(id);
 		try {
@@ -54,12 +78,20 @@ public class DAO {
 		}
 	}
 	
+	/**
+	 * Método buscar todos, responsável por consultar todas as tarefas na base de dados.
+	 * @return {@link List}
+	 * */
 	@SuppressWarnings("unchecked")
 	public List<Tarefa> buscarTodos() {
 		Query query = em.createQuery("Select t from Tarefa t");
 		return query.getResultList();
 	}
 	
+	/**
+	 * Método filtrar responsável por filtrar as tarefas na base de dados.
+	 * @return {@link List}
+	 * */
 	@SuppressWarnings("unchecked")
 	public List<Tarefa> filtrar(Tarefa tarefa) {
 		StringBuilder consulta = new StringBuilder("SELECT t FROM Tarefa t");

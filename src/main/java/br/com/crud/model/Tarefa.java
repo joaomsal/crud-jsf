@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
+ * Classe model representando a tabela tarefa
  * @author João Manoel Santos Almeida
  * @since
  * */

@@ -12,6 +12,8 @@ import br.com.crud.rn.TarefaRN;
 import br.com.crud.util.MensagemUtil;
 
 /**
+ * Classe do MBean de tarefa.
+ * 
  * @author João Manoel Santos Almeida
  * @since Abril 2023
  * */
@@ -37,6 +39,10 @@ public class TarefaMBean implements Serializable{
 		tarefas = tarefaRN.listar();
 	}
 	
+	/**
+	 * Método adicionar, responsável por salvar tarefa na base de dados.
+	 * 
+	 * */
 	public void adicionar() {
 		try {
 			tarefa.setSituacao("em andamento");
@@ -45,39 +51,50 @@ public class TarefaMBean implements Serializable{
 		} catch (Exception e) {
 			MensagemUtil.adicionarMensagemErro("Erro ao adicionar tarefa.");
 			e.printStackTrace();
-		}finally {
+		} finally {
 			tarefa = new Tarefa();
 		}
 	}
 	
 	
+	/**
+	 * Método deletar, responsável por excluir tarefa da base de dados.
+	 * 
+	 * */
 	public void deletar() {
 		try {
 			tarefaRN.deletar(selecionada);
-			tarefas = tarefaRN.listar();
+			buscar();
 			MensagemUtil.adicionarMensagemConfirmacao("Tarefa deletada com sucesso.");
 		} catch (Exception e) {
 			MensagemUtil.adicionarMensagemErro("Erro ao deletar tarefa.");
 			e.printStackTrace();
-		}finally {
-			tarefa = new Tarefa();
+		} finally {
+			selecionada = new Tarefa();
 		}
 	}
 	
-	
+	/**
+	 * Método alterar, responsável por alterar tarefa na base de dados.
+	 * 
+	 * */
 	public void alterar() {
 		try {
 			tarefaRN.atualizar(selecionada);
+			buscar();
 			MensagemUtil.adicionarMensagemConfirmacao("Tarefa alterada com sucesso.");
 		} catch (Exception e) {
 			MensagemUtil.adicionarMensagemErro("Erro ao alterada tarefa.");
 			e.printStackTrace();
-		}finally {
-			tarefa = new Tarefa();
+		} finally {
+			selecionada = new Tarefa();
 		}
 	}
 	
-	
+	/**
+	 * Método concluir, responsável por atualizar a tarefa para 'concluída' na base de dados.
+	 * 
+	 * */
 	public void concluir() {
 		try {
 			selecionada.setSituacao("concluída");
@@ -86,12 +103,15 @@ public class TarefaMBean implements Serializable{
 		} catch (Exception e) {
 			MensagemUtil.adicionarMensagemErro("Erro ao concluir tarefa.");
 			e.printStackTrace();
-		}finally {
-			tarefa = new Tarefa();
+		} finally {
+			selecionada = new Tarefa();
 		}
 	}
 	
-	
+	/**
+	 * Método buscar, responsável por filtrar tarefas na base de dados.
+	 * 
+	 * */
 	public void buscar() {
 		try {
 			tarefas = tarefaRN.filtrar(tarefa);
