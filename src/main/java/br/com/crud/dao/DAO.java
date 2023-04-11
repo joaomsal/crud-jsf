@@ -107,11 +107,13 @@ public class DAO {
 			consulta.append(hasAnd ? " AND " : " ");
 			consulta.append(" (t.titulo LIKE '%" + tarefa.getTitulo() + "%' OR ");
 			consulta.append(" t.descricao LIKE '%" + tarefa.getTitulo() + "%' )");
+			hasAnd = true;
 		}
 		
 		if(tarefa.getResponsavel() != null  && !tarefa.getResponsavel().isEmpty()) {
 			consulta.append(hasAnd ? " AND " : " ");
 			consulta.append(" t.responsavel  = '" + tarefa.getResponsavel() + "'");
+			hasAnd = true;
 		}
 		
 		if(tarefa.getSituacao() != null  && !tarefa.getSituacao().isEmpty()) {
