@@ -96,6 +96,11 @@ public class Tarefa implements Serializable{
 	public void setSituacao(String situacao) {
 		this.situacao = situacao;
 	}
+	
+	public boolean isConcluida() {
+		return  this.situacao != null &&
+				this.situacao.equals("concluída");
+	}
 
 	@Override
 	public int hashCode() {

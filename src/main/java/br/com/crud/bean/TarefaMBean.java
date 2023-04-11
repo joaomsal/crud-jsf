@@ -36,7 +36,6 @@ public class TarefaMBean implements Serializable{
 		selecionada = new Tarefa();
 		tarefas = new ArrayList<Tarefa>();
 		tarefaRN = new TarefaRN();
-		tarefas = tarefaRN.listar();
 	}
 	
 	/**

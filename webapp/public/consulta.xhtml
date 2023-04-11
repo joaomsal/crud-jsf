@@ -89,6 +89,7 @@
 											</p:commandButton>
 											<p:commandButton icon="fa fa-check" title="Concluir"
 												action="#{tarefaMBean.concluir}" process="@this"
+												rendered="#{!tarefa.concluida}"
 												update=":form_geral" styleClass="ui-button-info">
 												<f:setPropertyActionListener value="#{tarefa}"
 													target="#{tarefaMBean.selecionada}" />
